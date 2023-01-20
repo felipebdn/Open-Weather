@@ -6,9 +6,7 @@ import { HomeContainer, LocalsContainer } from './styles'
 
 interface infoLocationsProps {
   name: string
-  local_names?: {
-    pt: string
-  }
+  pt?: string
   lat: number
   lon: number
   country: string
@@ -27,13 +25,23 @@ export function Home() {
           appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
         },
       })
+      res.data.map((local:any, i:number, state: any)=>{
+        const data: infoLocationsProps = {
+          name: local.name,
+          pt: !local.local_names ? 'not found' : local.local_names.pt,
+          lat: local.lat,
+          lon: local.lon,
+          country: local.country,
+          state: local.state,
+        }
+        setInfoLocations((state)=>[...state, data])
+        return state
+      })
 
-      setInfoLocations(res.data)
     } finally {
       console.log('terminou')
     }
   }, [])
-  console.log(infoLocations)
 
   return (
     <HomeContainer>
@@ -42,7 +50,7 @@ export function Home() {
         return (
           <LocalsContainer key={`${location.lat}${location.lon}`}>
             <div>
-              <h3>{`Cidade: ${location.local_names.pt}`}</h3>
+              <h3>{`Cidade: ${location.pt}`}</h3>
               <p>{`País: ${location.country}`}</p>
             </div>
             <p>{location.name}</p>
