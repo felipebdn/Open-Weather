@@ -25,7 +25,7 @@ export function Home() {
           appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
         },
       })
-      res.data.map((local:any, i:number, state: any)=>{
+      res.data.map((local: any, i: number, state: any) => {
         const data: infoLocationsProps = {
           name: local.name,
           pt: !local.local_names ? 'not found' : local.local_names.pt,
@@ -34,10 +34,9 @@ export function Home() {
           country: local.country,
           state: local.state,
         }
-        setInfoLocations((state)=>[...state, data])
+        setInfoLocations((state) => [...state, data])
         return state
       })
-
     } finally {
       console.log('terminou')
     }
