@@ -2,11 +2,13 @@ import { useCallback, useState } from 'react'
 import { env } from '../../environment'
 import { api } from '../../lib/axios'
 import { ShearchLocals } from './components/ShearchLocals'
-import { HomeContainer } from './styles'
+import { HomeContainer, LocalsContainer } from './styles'
 
 interface infoLocationsProps {
   name: string
-  pt?: string
+  local_names?: {
+    pt: string
+  }
   lat: number
   lon: number
   country: string
@@ -14,9 +16,7 @@ interface infoLocationsProps {
 }
 
 export function Home() {
-  const [infoLocations, setInfoLocations] = useState<infoLocationsProps[]>(
-    [] as infoLocationsProps[],
-  )
+  const [infoLocations, setInfoLocations] = useState<infoLocationsProps[]>([])
 
   const ShearchLocation = useCallback(async (dataInput: string) => {
     try {
@@ -27,27 +27,31 @@ export function Home() {
           appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
         },
       })
-      const data: infoLocationsProps = res.data.map()
 
-      setInfoLocations(data)
+      setInfoLocations(res.data)
     } finally {
       console.log('terminou')
     }
   }, [])
+  console.log(infoLocations)
 
   return (
     <HomeContainer>
       <ShearchLocals shearchLocation={ShearchLocation} />
       {infoLocations.map((location) => {
         return (
-          <div key={`${location.lat}${location.lon}`}>
-            <h3>{location.name}</h3>
-            <span>{location.pt}</span>
-            <p>{`Latitude: ${location.lat}`}</p>
-            <p>{`Longitude: ${location.lon}`}</p>
-            <p>{`País: ${location.lat}`}</p>
+          <LocalsContainer key={`${location.lat}${location.lon}`}>
+            <div>
+              <h3>{`Cidade: ${location.local_names.pt}`}</h3>
+              <p>{`País: ${location.country}`}</p>
+            </div>
+            <p>{location.name}</p>
             <p>{`Estado: ${location.state}`}</p>
-          </div>
+            <div>
+              <p>{`Latitude: ${location.lat}`}</p>
+              <p>{`Longitude: ${location.lon}`}</p>
+            </div>
+          </LocalsContainer>
         )
       })}
     </HomeContainer>
