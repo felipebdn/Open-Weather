@@ -19,19 +19,15 @@ export function Home() {
   const [infoLocations, setInfoLocations] = useState<infoLocationsProps[]>([])
 
   const ShearchLocation = useCallback(async (dataInput: string) => {
-    try {
-      const res = await api.get('geo/1.0/direct?', {
-        params: {
-          q: dataInput,
-          limit: 5,
-          appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
-        },
-      })
+    const res = await api.get('geo/1.0/direct?', {
+      params: {
+        q: dataInput,
+        limit: 5,
+        appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
+      },
+    })
 
-      setInfoLocations(res.data)
-    } finally {
-      console.log('terminou')
-    }
+    setInfoLocations(res.data)
   }, [])
 
   return (
