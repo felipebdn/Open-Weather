@@ -1,9 +1,9 @@
+import { MapPin } from 'phosphor-react'
 import { useCallback, useState } from 'react'
 import { env } from '../../environment'
 import { api } from '../../lib/axios'
 import { ShearchLocals } from './components/ShearchLocals'
-import { HomeContainer, LocalsContainer } from './styles'
-
+import { HomeContainer, Locals, LocalsContainer } from './styles'
 interface infoLocationsProps {
   name: string
   local_names?: {
@@ -37,26 +37,28 @@ export function Home() {
   return (
     <HomeContainer>
       <ShearchLocals shearchLocation={ShearchLocation} />
-      {infoLocations.map((location) => {
-        return (
-          <LocalsContainer key={`${location.lat}${location.lon}`}>
-            <main>
-              <div>
-                <h3>
-                  {!location.local_names
-                    ? 'not found'
-                    : location.local_names.pt}
-                </h3>
-                <p>{`País: ${location.country}`}</p>
-              </div>
-              <p>{location.state}</p>
-            </main>
-            <span>
-              <img src="./assets/images/city-pin.png" alt="" />
-            </span>
-          </LocalsContainer>
-        )
-      })}
+      <LocalsContainer>
+        {infoLocations.map((location) => {
+          return (
+            <Locals key={`${location.lat}${location.lon}`}>
+              <main>
+                <div>
+                  <h3>
+                    {!location.local_names
+                      ? 'not found'
+                      : location.local_names.pt}
+                  </h3>
+                  <p>{`País: ${location.country}`}</p>
+                </div>
+                <p>{location.state}</p>
+              </main>
+              <span>
+                <MapPin size={32} weight="fill" />
+              </span>
+            </Locals>
+          )
+        })}
+      </LocalsContainer>
     </HomeContainer>
   )
 }

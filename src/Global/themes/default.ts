@@ -1,5 +1,6 @@
 export const defaultTheme = {
   blue: '#3294F8',
+  red: '#FA4F4A',
 
   'base-title': '#E7EDF4',
   'base-subtitle': '#C4D4E3',

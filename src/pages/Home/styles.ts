@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import mapPin from '../../assets/images/city-pin.png'
 
 export const HomeContainer = styled.div`
   width: 100vw;
@@ -11,13 +12,18 @@ export const HomeContainer = styled.div`
 export const LocalsContainer = styled.div`
   max-width: 50%;
   width: 100%;
-  padding: 0.5rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`
+export const Locals = styled.div`
+  background: ${({ theme }) => theme['base-post']};
+
+  width: 100%;
 
   display: flex;
   flex-direction: row;
-  gap: 2rem;
-
-  align-items: c;
+  align-items: center;
 
   main {
     flex: 1;
@@ -29,12 +35,9 @@ export const LocalsContainer = styled.div`
   }
 
   span {
-    width: 20%;
-    height: inherit;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-    }
+    background-image: url(${mapPin});
+    padding: 2rem;
+    line-height: 0;
+    color: ${({ theme }) => theme.red};
   }
 `
