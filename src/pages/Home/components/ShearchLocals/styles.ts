@@ -16,6 +16,6 @@ export const ShearchLocalsContainer = styled.form`
     border-radius: 10px;
     padding: 0.875rem;
     max-width: 50%;
-    min-width: 40%;
+    width: 100%;
   }
 `
