@@ -35,7 +35,6 @@ export const Locals = styled.div`
   }
 
   span {
-    background-image: url(${mapPin});
     padding: 2rem;
     line-height: 0;
     color: ${({ theme }) => theme.red};
