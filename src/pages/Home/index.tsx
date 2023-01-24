@@ -35,12 +35,11 @@ export function Home() {
       setInfoLocations((state) => [...state, data])
       return null
     })
-    const data = new Map()
-    infoLocations.forEach((element: infoLocationsProps) => {
-      if(!data.has(element.name))
-    })
   }, [])
 
+  infoLocations.forEach((element) => {
+    console.log(element)
+  })
   return (
     <HomeContainer>
       <ShearchLocals shearchLocation={ShearchLocation} />
