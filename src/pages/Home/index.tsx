@@ -6,9 +6,6 @@ import { ShearchLocals } from './components/ShearchLocals'
 import { HomeContainer, Locals, LocalsContainer } from './styles'
 interface infoLocationsProps {
   name: string
-  local_names?: {
-    pt?: string
-  }
   lat: number
   lon: number
   country: string
@@ -27,7 +24,17 @@ export function Home() {
       },
     })
 
-    setInfoLocations(res.data)
+    res.data.map((local: any) => {
+      const data: infoLocationsProps = {
+        name: !local.local_names ? local.name : local.local_names.pt,
+        lat: local.lat,
+        lon: local.lon,
+        country: local.country,
+        state: local.state,
+      }
+      setInfoLocations((state) => [...state, data])
+      return null
+    })
   }, [])
 
   return (
@@ -39,12 +46,8 @@ export function Home() {
             <Locals key={`${location.lat}${location.lon}`}>
               <main>
                 <div>
-                  <h3>
-                    {!location.local_names
-                      ? 'not found'
-                      : location.local_names.pt}
-                  </h3>
-                  <p>{`País: ${location.country}`}</p>
+                  <h3>{location.name}</h3>
+                  <p>{`Pais: ${location.country}`}</p>
                 </div>
                 <p>{location.state}</p>
               </main>
