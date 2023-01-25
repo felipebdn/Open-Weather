@@ -1,9 +1,11 @@
 import { MapPin } from 'phosphor-react'
-import { useCallback, useState } from 'react'
+import { useReducer } from 'react'
 import { env } from '../../environment'
 import { api } from '../../lib/axios'
 import { ShearchLocals } from './components/ShearchLocals'
 import { HomeContainer, Locals, LocalsContainer } from './styles'
+import { LocalsReducer } from '../../reducer/locals/reducer'
+
 interface infoLocationsProps {
   name: string
   lat: number
@@ -12,10 +14,17 @@ interface infoLocationsProps {
   state?: string
 }
 
-export function Home() {
-  const [infoLocations, setInfoLocations] = useState<infoLocationsProps[]>([])
+export interface locationsStateType {
+  infoLocations: infoLocationsProps[]
+}
 
-  const ShearchLocation = useCallback(async (dataInput: string) => {
+export function Home() {
+  const [locationsState, dispatch] = useReducer(LocalsReducer, {
+    infoLocations: [],
+  })
+  const { infoLocations } = locationsState
+
+  const ShearchLocation = async (dataInput: string) => {
     const res = await api.get('geo/1.0/direct?', {
       params: {
         q: dataInput,
@@ -32,14 +41,16 @@ export function Home() {
         country: local.country,
         state: local.state,
       }
-      setInfoLocations((state) => [...state, data])
+      dispatch({
+        type: 'GET_LOCAL_BY_INPUT',
+        payload: {
+          data,
+        },
+      })
       return null
     })
-  }, [])
+  }
 
-  infoLocations.forEach((element) => {
-    console.log(element)
-  })
   return (
     <HomeContainer>
       <ShearchLocals shearchLocation={ShearchLocation} />
