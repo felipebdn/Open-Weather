@@ -1,21 +1,20 @@
 import { ShearchLocalsContainer } from './styles'
 import * as zod from 'zod'
 import { useForm } from 'react-hook-form'
-
-interface ShearchLocalsProps {
-  shearchLocation: (data: string) => void
-}
+import { useContext } from 'react'
+import { localsContext } from '../../../../context/localsContext'
 
 const ShearchFormDataSchema = zod.object({
   query: zod.string(),
 })
-
 type ShearchFormDataType = zod.infer<typeof ShearchFormDataSchema>
-export function ShearchLocals({ shearchLocation }: ShearchLocalsProps) {
+
+export function ShearchLocals() {
+  const { ShearchLocation } = useContext(localsContext)
   const { handleSubmit, register } = useForm<ShearchFormDataType>()
 
   function fetchStrings({ query }: ShearchFormDataType) {
-    shearchLocation(query)
+    ShearchLocation(query)
   }
   return (
     <ShearchLocalsContainer onSubmit={handleSubmit(fetchStrings)}>
