@@ -16,11 +16,15 @@ export function ShearchLocationAction(data: infoLocationsTypes) {
     },
   }
 }
-export function GetCurrentWeather(data: airPollutionTypes) {
+export function GetCurrentWeather(
+  resWeather: currentWeatherTypes,
+  resAirPollution: airPollutionTypes,
+) {
   return {
     type: ActionTypes.GET_CURRENT_WEATHER,
     payload: {
-      data,
+      resWeather,
+      resAirPollution,
     },
   }
 }

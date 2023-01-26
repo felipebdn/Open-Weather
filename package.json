@@ -11,6 +11,8 @@
     "lint-fix": "eslint src --ext .ts,.tsx --fix"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.2",
+    "@radix-ui/react-toggle-group": "^1.0.2",
     "axios": "^1.2.3",
     "immer": "^9.0.18",
     "phosphor-react": "^1.4.1",

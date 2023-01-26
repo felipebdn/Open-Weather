@@ -79,7 +79,7 @@ export interface currentWeatherTypes {
   cod: number
 }
 export interface locationsStateType {
-  infoLocations: infoLocationsProps[]
+  infoLocations: infoLocationsTypes[]
   isCoordinates: boolean
   airPollution: airPollutionTypes
   currentWeather: currentWeatherTypes
@@ -144,8 +144,9 @@ export function localsReducer(state: locationsStateType, action: any) {
     case ActionTypes.GET_CURRENT_WEATHER:
       return produce(state, (draft) => {
         draft.isCoordinates = true
+        draft.airPollution = action.payload.resAirPollution
+        draft.currentWeather = action.payload.resWeather
       })
-
     default:
       return state
   }

@@ -50,15 +50,15 @@ export function LocalsContextProvider({
   }
 
   async function GetWeatherInformation(lat: number, lon: number) {
-    // const resWeather = await api.get('data/2.5/weather?', {
-    //   params: {
-    //     lat,
-    //     lon,
-    //     appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
-    //     units: 'metric',
-    //     lang: 'pt_br',
-    //   },
-    // })
+    const resWeather = await api.get('data/2.5/weather?', {
+      params: {
+        lat,
+        lon,
+        appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
+        units: 'metric',
+        lang: 'pt_br',
+      },
+    })
     const resAirPollution = await api.get('data/2.5/air_pollution?', {
       params: {
         lat,
@@ -66,10 +66,7 @@ export function LocalsContextProvider({
         appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
       },
     })
-    // console.log(resWeather.data)
-    // console.log(JSON.stringify(resAirPollution.data, null, '\t'))
-
-    GetCurrentWeather(resAirPollution.data)
+    dispatch(GetCurrentWeather(resWeather.data, resAirPollution.data))
   }
 
   return (

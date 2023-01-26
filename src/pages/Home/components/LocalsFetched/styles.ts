@@ -5,19 +5,36 @@ export const LocalsContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 `
 export const Locals = styled.div`
   background: ${({ theme }) => theme['base-post']};
 
   width: 100%;
+  height: 5rem;
 
   display: flex;
   flex-direction: row;
   align-items: center;
 
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+
+  &:hover {
+    border: 2px solid ${({ theme }) => theme['base-border']};
+  }
+
   main {
+    height: inherit;
+    cursor: pointer;
     flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1.5rem;
+
     div {
       display: flex;
       flex-direction: row;
@@ -26,8 +43,13 @@ export const Locals = styled.div`
   }
 
   span {
-    padding: 2rem;
     line-height: 0;
     color: ${({ theme }) => theme.red};
+  }
+`
+export const ButtonMapContainer = styled.button`
+  img {
+    width: 5rem;
+    height: 100%;
   }
 `
