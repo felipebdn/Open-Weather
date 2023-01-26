@@ -16,7 +16,7 @@ export function Home() {
     <HomeContainer>
       <ShearchLocals />
       <LocalsFetched />
-      <WeatherInformation />
+      {isCoordinates && <WeatherInformation />}
     </HomeContainer>
   )
 }

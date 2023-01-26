@@ -63,8 +63,8 @@ export interface currentWeatherTypes {
   }
   dt: number
   sys: {
-    type: number
-    id: number
+    // type: number
+    // id: number
     country: string
     sunrise: number
     sunset: number
@@ -92,8 +92,8 @@ export const defaultValuesReducer = {
   },
   currentWeather: {
     coord: {
-      lon: 0,
       lat: 0,
+      lon: 0,
     },
     weather: [],
     base: '',
@@ -118,8 +118,8 @@ export const defaultValuesReducer = {
     },
     dt: 0,
     sys: {
-      type: 0,
-      id: 0,
+      // type: 0,
+      // id: 0,
       country: '',
       sunrise: 0,
       sunset: 0,
@@ -135,8 +135,6 @@ export function localsReducer(state: locationsStateType, action: any) {
   switch (action.type) {
     case ActionTypes.GET_LOCAL_BY_INPUT:
       return produce(state, (draft) => {
-        console.log(action.payload.data)
-
         draft.isCoordinates = false
         draft.infoLocations.push(action.payload.data)
       })

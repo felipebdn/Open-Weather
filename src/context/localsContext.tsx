@@ -77,6 +77,9 @@ export function LocalsContextProvider({
         appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
       },
     })
+    console.log(resWeather.data)
+    console.log(resAirPollution.data)
+
     GetCurrentWeather(resWeather.data, resAirPollution.data)
   }
 
