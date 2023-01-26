@@ -8,35 +8,33 @@ export interface infoLocationsProps {
   country: string
   state: string
 }
-type listType = {
-  main: {
-    aqi: number
+export interface airPollutionTypes {
+  coord: {
+    lat: number
+    lon: number
   }
-  components: {
-    co: number
-    no: number
-    no2: number
-    o3: number
-    so2: number
-    pm2_5: number
-    pm10: number
-    nh3: number
+  list: {
+    dt: number
+    main: {
+      aqi: number
+    }
+    components: {
+      co: number
+      no: number
+      no2: number
+      o3: number
+      so2: number
+      pm2_5: number
+      pm10: number
+      nh3: number
+    }
+  }[]
+}
+export interface currentWeatherTypes {
+  coord: {
+    lat: number
+    lon: number
   }
-  dt: number
-}
-
-export interface coordinates {
-  lat: number
-  lon: number
-}
-
-interface airPollutionTypes {
-  coord: coordinates
-  list: listType[]
-}
-
-interface currentWeatherTypes {
-  coord: coordinates
   weather: {
     id: number
     main: string
@@ -60,20 +58,31 @@ interface currentWeatherTypes {
     deg: number
     gust: number
   }
-  rain: {
-    1h: number
+  clouds: {
+    all: number
   }
+  dt: number
+  sys: {
+    type: number
+    id: number
+    country: string
+    sunrise: number
+    sunset: number
+  }
+  timezone: number
+  id: number
+  name: string
+  cod: number
 }
-
 export interface locationsStateType {
   infoLocations: infoLocationsProps[]
-  isCoordinates: coordinates | null
+  isCoordinates: boolean
   airPollution: airPollutionTypes
   currentWeather: currentWeatherTypes
 }
 export const defaultValuesReducer = {
   infoLocations: [],
-  isCoordinates: null,
+  isCoordinates: false,
   airPollution: {
     coord: {
       lon: 0,
@@ -81,15 +90,63 @@ export const defaultValuesReducer = {
     },
     list: [],
   },
+  currentWeather: {
+    coord: {
+      lon: 0,
+      lat: 0,
+    },
+    weather: [],
+    base: '',
+    main: {
+      temp: 0,
+      feels_like: 0,
+      temp_min: 0,
+      temp_max: 0,
+      pressure: 0,
+      humidity: 0,
+      sea_level: 0,
+      grnd_level: 0,
+    },
+    visibility: 0,
+    wind: {
+      speed: 0,
+      deg: 0,
+      gust: 0,
+    },
+    clouds: {
+      all: 0,
+    },
+    dt: 0,
+    sys: {
+      type: 0,
+      id: 0,
+      country: '',
+      sunrise: 0,
+      sunset: 0,
+    },
+    timezone: 0,
+    id: 0,
+    name: '',
+    cod: 0,
+  },
 }
 
 export function localsReducer(state: locationsStateType, action: any) {
   switch (action.type) {
     case ActionTypes.GET_LOCAL_BY_INPUT:
       return produce(state, (draft) => {
-        draft.isCoordinates = null
+        console.log(action.payload.data)
+
+        draft.isCoordinates = false
         draft.infoLocations.push(action.payload.data)
       })
+    case ActionTypes.GET_CURRENT_WEATHER:
+      return produce(state, (draft) => {
+        draft.isCoordinates = true
+        draft.currentWeather = action.payload.resWeather
+        draft.airPollution = action.payload.resWeather
+      })
+
     default:
       return state
   }

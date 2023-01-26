@@ -1,16 +1,23 @@
 import { createContext, ReactNode, useReducer } from 'react'
 import {
-  coordinates,
+  airPollutionTypes,
+  currentWeatherTypes,
   defaultValuesReducer,
   infoLocationsProps,
   localsReducer,
 } from '../reducer/locals/reducer'
 import { env } from '../environment'
 import { api } from '../lib/axios'
-import { ShearchLocationAction } from '../reducer/locals/actions'
+import {
+  GetCurrentWeather,
+  ShearchLocationAction,
+} from '../reducer/locals/actions'
 
 interface localsContextType {
   infoLocations: infoLocationsProps[]
+  airPollution: airPollutionTypes
+  currentWeather: currentWeatherTypes
+  isCoordinates: boolean
   ShearchLocation: (dataInput: string) => void
   GetWeatherInformation: (lat: number, lon: number) => void
 }
@@ -28,7 +35,8 @@ export function LocalsContextProvider({
     localsReducer,
     defaultValuesReducer,
   )
-  const { infoLocations } = locationsState
+  const { infoLocations, airPollution, currentWeather, isCoordinates } =
+    locationsState
 
   async function ShearchLocation(dataInput: string) {
     const res = await api.get('geo/1.0/direct?', {
@@ -53,13 +61,35 @@ export function LocalsContextProvider({
   }
 
   async function GetWeatherInformation(lat: number, lon: number) {
-    console.log(lat)
-    console.log(lon)
+    const resWeather = await api.get('data/2.5/weather?', {
+      params: {
+        lat,
+        lon,
+        appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
+        units: 'metric',
+        lang: 'pt_br',
+      },
+    })
+    const resAirPollution = await api.get('data/2.5/air_pollution?', {
+      params: {
+        lat,
+        lon,
+        appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
+      },
+    })
+    GetCurrentWeather(resWeather.data, resAirPollution.data)
   }
 
   return (
     <localsContext.Provider
-      value={{ infoLocations, ShearchLocation, GetWeatherInformation }}
+      value={{
+        infoLocations,
+        ShearchLocation,
+        GetWeatherInformation,
+        airPollution,
+        currentWeather,
+        isCoordinates,
+      }}
     >
       {children}
     </localsContext.Provider>
