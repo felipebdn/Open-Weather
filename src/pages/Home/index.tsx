@@ -6,17 +6,17 @@ import { WeatherInformation } from './components/WeatherInformation'
 import { HomeContainer } from './styles'
 
 export function Home() {
-  const { isCoordinates, airPollution, currentWeather } =
-    useContext(localsContext)
+  const { infoLocations, airPollution } = useContext(localsContext)
   // console.log('isCoordinates', isCoordinates)
   // console.log('airPollution', airPollution)
-  // console.log('currentWeather', currentWeather)
+  console.log('infoLocations', JSON.stringify(infoLocations, null, '\t'))
+  console.log('airPollution', JSON.stringify(airPollution, null, '\t'))
 
   return (
     <HomeContainer>
       <ShearchLocals />
       <LocalsFetched />
-      {isCoordinates && <WeatherInformation />}
+      {/* {isCoordinates && <WeatherInformation />} */}
     </HomeContainer>
   )
 }

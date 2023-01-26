@@ -3,7 +3,7 @@ import {
   airPollutionTypes,
   currentWeatherTypes,
   defaultValuesReducer,
-  infoLocationsProps,
+  infoLocationsTypes,
   localsReducer,
 } from '../reducer/locals/reducer'
 import { env } from '../environment'
@@ -14,7 +14,7 @@ import {
 } from '../reducer/locals/actions'
 
 interface localsContextType {
-  infoLocations: infoLocationsProps[]
+  infoLocations: infoLocationsTypes[]
   airPollution: airPollutionTypes
   currentWeather: currentWeatherTypes
   isCoordinates: boolean
@@ -46,30 +46,19 @@ export function LocalsContextProvider({
         appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
       },
     })
-
-    res.data.map((local: any) => {
-      const data: infoLocationsProps = {
-        name: !local.local_names ? local.name : local.local_names.pt,
-        lat: local.lat,
-        lon: local.lon,
-        country: local.country,
-        state: local.state,
-      }
-      dispatch(ShearchLocationAction(data))
-      return null
-    })
+    dispatch(ShearchLocationAction(res.data))
   }
 
   async function GetWeatherInformation(lat: number, lon: number) {
-    const resWeather = await api.get('data/2.5/weather?', {
-      params: {
-        lat,
-        lon,
-        appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
-        units: 'metric',
-        lang: 'pt_br',
-      },
-    })
+    // const resWeather = await api.get('data/2.5/weather?', {
+    //   params: {
+    //     lat,
+    //     lon,
+    //     appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
+    //     units: 'metric',
+    //     lang: 'pt_br',
+    //   },
+    // })
     const resAirPollution = await api.get('data/2.5/air_pollution?', {
       params: {
         lat,
@@ -77,10 +66,10 @@ export function LocalsContextProvider({
         appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
       },
     })
-    console.log(resWeather.data)
-    console.log(resAirPollution.data)
+    // console.log(resWeather.data)
+    // console.log(JSON.stringify(resAirPollution.data, null, '\t'))
 
-    GetCurrentWeather(resWeather.data, resAirPollution.data)
+    GetCurrentWeather(resAirPollution.data)
   }
 
   return (

@@ -1,15 +1,14 @@
 import {
   airPollutionTypes,
   currentWeatherTypes,
-  infoLocationsProps,
+  infoLocationsTypes,
 } from './reducer'
 
 export enum ActionTypes {
   GET_LOCAL_BY_INPUT = 'GET_LOCAL_BY_INPUT',
   GET_CURRENT_WEATHER = 'GET_CURRENT_WEATHER',
 }
-
-export function ShearchLocationAction(data: infoLocationsProps) {
+export function ShearchLocationAction(data: infoLocationsTypes) {
   return {
     type: ActionTypes.GET_LOCAL_BY_INPUT,
     payload: {
@@ -17,16 +16,11 @@ export function ShearchLocationAction(data: infoLocationsProps) {
     },
   }
 }
-
-export function GetCurrentWeather(
-  resWeather: currentWeatherTypes,
-  resAirPollution: airPollutionTypes,
-) {
+export function GetCurrentWeather(data: airPollutionTypes) {
   return {
     type: ActionTypes.GET_CURRENT_WEATHER,
     payload: {
-      resWeather,
-      resAirPollution,
+      data,
     },
   }
 }

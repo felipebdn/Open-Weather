@@ -1,8 +1,12 @@
 import produce from 'immer'
 import { ActionTypes } from './actions'
 
-export interface infoLocationsProps {
+export interface infoLocationsTypes {
   name: string
+  local_names?: {
+    pt: string
+    en: string
+  }
   lat: number
   lon: number
   country: string
@@ -14,7 +18,6 @@ export interface airPollutionTypes {
     lon: number
   }
   list: {
-    dt: number
     main: {
       aqi: number
     }
@@ -28,6 +31,7 @@ export interface airPollutionTypes {
       pm10: number
       nh3: number
     }
+    dt: number
   }[]
 }
 export interface currentWeatherTypes {
@@ -130,19 +134,16 @@ export const defaultValuesReducer = {
     cod: 0,
   },
 }
-
 export function localsReducer(state: locationsStateType, action: any) {
   switch (action.type) {
     case ActionTypes.GET_LOCAL_BY_INPUT:
       return produce(state, (draft) => {
         draft.isCoordinates = false
-        draft.infoLocations.push(action.payload.data)
+        draft.infoLocations = action.payload.data
       })
     case ActionTypes.GET_CURRENT_WEATHER:
       return produce(state, (draft) => {
         draft.isCoordinates = true
-        draft.currentWeather = action.payload.resWeather
-        draft.airPollution = action.payload.resWeather
       })
 
     default:
