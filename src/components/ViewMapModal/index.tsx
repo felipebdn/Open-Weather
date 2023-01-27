@@ -8,6 +8,7 @@ import {
   Overlay,
   ToggleGroupRoot,
 } from './styles'
+import { useState } from 'react'
 
 interface ViewMapModalProps {
   lat: number
@@ -16,6 +17,8 @@ interface ViewMapModalProps {
 }
 
 export function ViewMapModal({ lat, lon, name }: ViewMapModalProps) {
+  const [maptype, setMaptype] = useState('roadmap')
+
   return (
     <Dialog.Portal>
       <Overlay />
@@ -28,14 +31,26 @@ export function ViewMapModal({ lat, lon, name }: ViewMapModalProps) {
             defaultValue="left"
             aria-label="Text alignment"
           >
-            <ToggleGroup.Item value="left" aria-label="Left aligned">
-              roadmap
+            <ToggleGroup.Item
+              value="left"
+              aria-label="Left aligned"
+              onClick={() => setMaptype('roadmap')}
+            >
+              Padrão
             </ToggleGroup.Item>
-            <ToggleGroup.Item value="center" aria-label="Center aligned">
-              satellite
+            <ToggleGroup.Item
+              value="center"
+              aria-label="Center aligned"
+              onClick={() => setMaptype('satellite')}
+            >
+              Satélite
             </ToggleGroup.Item>
-            <ToggleGroup.Item value="right" aria-label="Right aligned">
-              hybrid
+            <ToggleGroup.Item
+              value="right"
+              aria-label="Right aligned"
+              onClick={() => setMaptype('hybrid')}
+            >
+              Híbrido
             </ToggleGroup.Item>
           </ToggleGroupRoot>
           <Close>
@@ -43,7 +58,7 @@ export function ViewMapModal({ lat, lon, name }: ViewMapModalProps) {
           </Close>
         </HeaderModeal>
         <img
-          src={`https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=14&size=800x600&maptype=hybrid&key=AIzaSyBJKYv48nuVQ5A2tcZXh-XSpLUi1pkNkAM`}
+          src={`https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=14&size=800x600&maptype=${maptype}&key=AIzaSyBJKYv48nuVQ5A2tcZXh-XSpLUi1pkNkAM`}
           alt=""
         />
       </Content>

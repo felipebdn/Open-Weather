@@ -3,6 +3,7 @@ export const defaultTheme = {
   red: '#FA4F4A',
   mauve: '#34343A',
   white: '#fff',
+  black: '#000',
 
   'base-title': '#E7EDF4',
   'base-subtitle': '#C4D4E3',

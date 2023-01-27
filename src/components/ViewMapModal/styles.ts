@@ -60,19 +60,20 @@ export const Close = styled(Dialog.Close)`
 
   box-shadow: 0 2px 10px ${({ theme }) => theme.mauve};
 
-  color: #000;
+  color: ${({ theme }) => theme.black};
 
   border: 1px solid transparent;
   background: ${({ theme }) => theme.white};
 `
 export const ToggleGroupRoot = styled(ToggleGroup.Root)`
-  background: #fff;
-  color: #000;
+  background: ${({ theme }) => theme.white};
+  color: ${({ theme }) => theme.black};
 
   display: inline-flex;
   border-radius: 20px;
 
   box-shadow: 0 2px 10px ${({ theme }) => theme.mauve};
+  border: none;
 
   button {
     all: unset;
@@ -82,6 +83,26 @@ export const ToggleGroupRoot = styled(ToggleGroup.Root)`
     line-height: 1;
     align-items: center;
     justify-content: center;
-    margin-left: 1px;
+    cursor: pointer;
+  }
+
+  button:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+  button:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  button:hover {
+    background: ${({ theme }) => theme['base-text']};
+  }
+  button[data-state='on'] {
+    background: ${({ theme }) => theme['base-span']};
+    color: ${({ theme }) => theme.white};
+  }
+  buttonfocus {
+    position: relative;
+    box-shadow: 0 0 0 2px black;
   }
 `

@@ -48,7 +48,6 @@ export function LocalsContextProvider({
     })
     dispatch(ShearchLocationAction(res.data))
   }
-
   async function GetWeatherInformation(lat: number, lon: number) {
     const resWeather = await api.get('data/2.5/weather?', {
       params: {
