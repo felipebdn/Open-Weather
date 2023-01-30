@@ -1,43 +1,42 @@
 import styled from 'styled-components'
 import { device } from '../../../../Global/GlobalStyle'
 
+const baseDivDash = styled.div`
+  background: ${({ theme }) => theme['base-post']};
+  padding: 1rem;
+`
+export const TemperatureStatus = styled(baseDivDash)`
+  grid-area: temp;
+`
+export const CurrentData = styled(baseDivDash)`
+  grid-area: headerC;
+`
+export const AirPollution = styled(baseDivDash)`
+  grid-area: headerA;
+`
+export const WeatherLayers = styled(baseDivDash)`
+  grid-area: aside;
+`
+export const WeatherForecast = styled(baseDivDash)`
+  grid-area: main;
+`
+
 export const WeatherInformationContainer = styled.div`
-  width: 90rem;
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  width: 100%;
+  padding: 1rem;
+  grid-template-areas:
+    'temp headerC headerA'
+    'aside headerC headerA'
+    'aside main main';
+
+  grid-template-columns: 3fr 4fr 2fr;
+  grid-row-gap: 1rem;
   grid-column-gap: 1rem;
 
+  /* 
   @media (${device.xl}) {
     padding: 0 1rem;
     width: 100%;
-  }
-`
-export const Sides = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`
-export const TempNow = styled.div`
-  background: gray;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-  border-radius: 15px;
-
-  img {
-    width: 6.25rem;
-  }
-
-  h1 {
-    font-size: 4rem;
-  }
-  aside {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    p {
-      font-size: 1.2rem;
-    }
-  }
+  } */
 `
