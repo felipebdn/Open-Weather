@@ -124,6 +124,26 @@ export const AirPollution = styled(baseDivDash)`
 `
 export const WeatherLayers = styled(baseDivDash)`
   grid-area: aside;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* justify-content: space-between; */
+
+  main {
+    width: 100%;
+
+    div {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        line-height: 0;
+      }
+    }
+  }
 `
 export const WeatherForecast = styled(baseDivDash)`
   grid-area: main;

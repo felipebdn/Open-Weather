@@ -9,6 +9,8 @@ import {
   ThumbsDown,
   Skull,
   Leaf,
+  CaretLeft,
+  CaretRight,
 } from 'phosphor-react'
 import { useContext } from 'react'
 import { localsContext } from '../../../../context/localsContext'
@@ -20,11 +22,14 @@ import {
   WeatherInformationContainer,
   WeatherLayers,
 } from './styles'
+import { Map, View } from 'ol'
+import TileLayer from 'ol/layer/Tile'
+import OSM from 'ol/source/OSM.js'
 
 export function WeatherInformation() {
   const { airPollution, currentWeather, infoLocations } =
     useContext(localsContext)
-  // console.log(JSON.stringify(currentWeather, null, '\t'))
+  console.log(JSON.stringify(currentWeather, null, '\t'))
 
   function GetHourByUnix(n: number) {
     return new Date(currentWeather.dt * 1000).toLocaleString('pt-BR', {
@@ -32,6 +37,19 @@ export function WeatherInformation() {
       minute: 'numeric',
     })
   }
+
+  const map = new Map({
+    view: new View({
+      center: [0, 0],
+      zoom: 1,
+    }),
+    layers: [
+      new TileLayer({
+        source: new OSM(),
+      }),
+    ],
+    target: 'map',
+  })
 
   return (
     <WeatherInformationContainer>
@@ -174,16 +192,16 @@ export function WeatherInformation() {
         </main>
       </AirPollution>
       <WeatherLayers>
-        <h3>camadas meteorológicas</h3>
+        <h3>Camadas meteorológicas</h3>
         <h1>Nuvens</h1>
         <main>
-          <img src="" alt="" />
+          {/* <img src="" alt="" /> */}
           <div>
             <button>
-              <svg />
+              <CaretLeft size={30} weight="bold" />
             </button>
             <button>
-              <svg />
+              <CaretRight size={30} weight="bold" />
             </button>
           </div>
         </main>
