@@ -38,112 +38,9 @@ export const TemperatureStatus = styled(baseDivDash)`
     }
   }
 `
-export const CurrentData = styled(baseDivDash)`
-  grid-area: headerC;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 1.5rem;
-
-  main {
-    flex: 1;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    div:last-child {
-      border: none;
-    }
-
-    div {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      border-bottom: 2px solid #303030;
-
-      padding: 0.5rem;
-
-      align-items: center;
-
-      p {
-        font-size: 1.5rem;
-      }
-
-      aside {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-    }
-  }
-`
-export const AirPollution = styled(baseDivDash)`
-  grid-area: headerA;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 1.5rem;
-
-  main {
-    flex: 1;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    div:last-child {
-      border: none;
-    }
-
-    div {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      border-bottom: 2px solid #303030;
-
-      padding: 0.5rem;
-
-      align-items: center;
-
-      p {
-        font-size: 1.3rem;
-      }
-
-      aside {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-    }
-  }
-`
 export const WeatherLayers = styled(baseDivDash)`
   grid-area: aside;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  /* justify-content: space-between; */
-
-  main {
-    width: 100%;
-
-    div {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-
-      button {
-        line-height: 0;
-      }
-    }
-  }
 `
 export const WeatherForecast = styled(baseDivDash)`
   grid-area: main;
@@ -154,11 +51,10 @@ export const WeatherInformationContainer = styled.div`
   width: 100%;
   padding: 1rem;
   grid-template-areas:
-    'temp headerC headerA'
-    'aside headerC headerA'
-    'aside main main';
+    'temp main'
+    'aside main';
 
-  grid-template-columns: 3fr 4fr 2fr;
+  grid-template-columns: 3fr 4fr;
   grid-row-gap: 1rem;
   grid-column-gap: 1rem;
 

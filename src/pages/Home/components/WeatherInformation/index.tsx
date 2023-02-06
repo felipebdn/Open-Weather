@@ -21,9 +21,6 @@ import {
   WeatherInformationContainer,
   WeatherLayers,
 } from './styles'
-import { Map, View } from 'ol'
-import TileLayer from 'ol/layer/Tile'
-import OSM from 'ol/source/OSM.js'
 
 export function WeatherInformation() {
   const { airPollution, currentWeather, infoLocations } =
@@ -37,18 +34,6 @@ export function WeatherInformation() {
     })
   }
 
-  const map = new Map({
-    view: new View({
-      center: [0, 0],
-      zoom: 1,
-    }),
-    layers: [
-      new TileLayer({
-        source: new OSM(),
-      }),
-    ],
-    target: 'map',
-  })
   return (
     <WeatherInformationContainer>
       <TemperatureStatus>
@@ -66,7 +51,7 @@ export function WeatherInformation() {
           </p>
         </aside>
       </TemperatureStatus>
-      <CurrentData>
+      <WeatherLayers>
         <h3>Dados atuais - {GetHourByUnix(currentWeather.dt)}</h3>
         <main>
           <div>
@@ -106,8 +91,6 @@ export function WeatherInformation() {
             </aside>
           </div>
         </main>
-      </CurrentData>
-      <AirPollution>
         <h3>Poluição do ar</h3>
         <main>
           <div>
@@ -188,61 +171,9 @@ export function WeatherInformation() {
             </aside>
           </div>
         </main>
-      </AirPollution>
-      <WeatherLayers>
-        <h3>Camadas meteorológicas</h3>
-        <h1>Nuvens</h1>
-        <main>
-          {map.getViewport}
-          {/* <img src="" alt="" /> */}
-          <div>
-            <button>
-              <CaretLeft size={30} weight="bold" />
-            </button>
-            <button>
-              <CaretRight size={30} weight="bold" />
-            </button>
-          </div>
-        </main>
-        <footer>em todo o mundo</footer>
       </WeatherLayers>
       <WeatherForecast>
-        <h3>Previsão dos próximos 3 dias</h3>
-        <main>
-          <div>
-            <h4>Segunda</h4>
-            <div>
-              <img src="" alt="" />
-              <div>
-                <h4>Chuva leve</h4>
-                <div>
-                  <div>
-                    <svg />
-                    <span>33º</span>
-                  </div>
-                  <div>
-                    <svg />
-                    <span>33º</span>
-                  </div>
-                  <div>
-                    <svg />
-                    <span>33º</span>
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <svg />
-                    <span>33º</span>
-                  </div>
-                  <div>
-                    <svg />
-                    <span>33º</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
+        <div>b</div>
       </WeatherForecast>
     </WeatherInformationContainer>
   )
