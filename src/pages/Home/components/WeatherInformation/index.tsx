@@ -2,7 +2,6 @@ import {
   ArrowUp,
   ArrowDown,
   ThermometerHot,
-  Drop,
   ArrowUpRight,
   SunHorizon,
   ThumbsUp,
@@ -50,7 +49,6 @@ export function WeatherInformation() {
     ],
     target: 'map',
   })
-
   return (
     <WeatherInformationContainer>
       <TemperatureStatus>
@@ -195,6 +193,7 @@ export function WeatherInformation() {
         <h3>Camadas meteorológicas</h3>
         <h1>Nuvens</h1>
         <main>
+          {map.getViewport}
           {/* <img src="" alt="" /> */}
           <div>
             <button>
