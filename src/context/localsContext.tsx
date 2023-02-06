@@ -3,6 +3,7 @@ import {
   airPollutionTypes,
   currentWeatherTypes,
   defaultValuesReducer,
+  forecastWeatherTypes,
   infoLocationsTypes,
   localsReducer,
 } from '../reducer/locals/reducer'
@@ -18,6 +19,7 @@ interface localsContextType {
   airPollution: airPollutionTypes
   currentWeather: currentWeatherTypes
   isCoordinates: boolean
+  forecastWeather: forecastWeatherTypes
   ShearchLocation: (dataInput: string) => void
   GetWeatherInformation: (lat: number, lon: number) => void
 }
@@ -35,8 +37,13 @@ export function LocalsContextProvider({
     localsReducer,
     defaultValuesReducer,
   )
-  const { infoLocations, airPollution, currentWeather, isCoordinates } =
-    locationsState
+  const {
+    infoLocations,
+    airPollution,
+    currentWeather,
+    isCoordinates,
+    forecastWeather,
+  } = locationsState
 
   async function ShearchLocation(dataInput: string) {
     const res = await api.get('geo/1.0/direct?', {
@@ -65,12 +72,28 @@ export function LocalsContextProvider({
         appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
       },
     })
-    dispatch(GetCurrentWeather(resWeather.data, resAirPollution.data))
+    const resForecastWeather = await api.get('data/2.5/forecast?', {
+      params: {
+        lat,
+        lon,
+        appid: env.REACT_APP_TOKEN_OPEN_WEATHER,
+        units: 'metric',
+        lang: 'pt_br',
+      },
+    })
+    dispatch(
+      GetCurrentWeather(
+        resWeather.data,
+        resAirPollution.data,
+        resForecastWeather.data,
+      ),
+    )
   }
 
   return (
     <localsContext.Provider
       value={{
+        forecastWeather,
         infoLocations,
         ShearchLocation,
         GetWeatherInformation,

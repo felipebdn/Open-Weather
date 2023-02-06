@@ -1,6 +1,7 @@
 import {
   airPollutionTypes,
   currentWeatherTypes,
+  forecastWeatherTypes,
   infoLocationsTypes,
 } from './reducer'
 
@@ -19,12 +20,14 @@ export function ShearchLocationAction(data: infoLocationsTypes) {
 export function GetCurrentWeather(
   resWeather: currentWeatherTypes,
   resAirPollution: airPollutionTypes,
+  resForecastWeather: forecastWeatherTypes,
 ) {
   return {
     type: ActionTypes.GET_CURRENT_WEATHER,
     payload: {
       resWeather,
       resAirPollution,
+      resForecastWeather,
     },
   }
 }

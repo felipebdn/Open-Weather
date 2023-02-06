@@ -12,6 +12,26 @@ export interface infoLocationsTypes {
   country: string
   state: string
 }
+export interface forecastWeatherTypes {
+  cnt: number
+  list: {
+    dt: number
+    main: {
+      temp: number
+      temp_min: number
+      temp_max: number
+    }
+    weather: {
+      description: string
+      icon: string
+    }[]
+    wind: {
+      speed: number
+      deg: number
+    }
+    dt_txt: string
+  }[]
+}
 export interface airPollutionTypes {
   coord: {
     lat: number
@@ -83,6 +103,7 @@ export interface locationsStateType {
   isCoordinates: boolean
   airPollution: airPollutionTypes
   currentWeather: currentWeatherTypes
+  forecastWeather: forecastWeatherTypes
 }
 export const defaultValuesReducer = {
   infoLocations: [],
@@ -133,6 +154,10 @@ export const defaultValuesReducer = {
     name: '',
     cod: 0,
   },
+  forecastWeather: {
+    cnt: 0,
+    list: [],
+  },
 }
 export function localsReducer(state: locationsStateType, action: any) {
   switch (action.type) {
@@ -146,6 +171,7 @@ export function localsReducer(state: locationsStateType, action: any) {
         draft.isCoordinates = true
         draft.airPollution = action.payload.resAirPollution
         draft.currentWeather = action.payload.resWeather
+        draft.forecastWeather = action.payload.resForecastWeather
       })
     default:
       return state

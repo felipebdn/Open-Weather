@@ -8,31 +8,58 @@ import {
   ThumbsDown,
   Skull,
   Leaf,
-  CaretLeft,
-  CaretRight,
 } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { localsContext } from '../../../../context/localsContext'
 import {
-  AirPollution,
-  CurrentData,
+  HourWeather,
   TemperatureStatus,
   WeatherForecast,
   WeatherInformationContainer,
   WeatherLayers,
 } from './styles'
 
+interface forecastWeatherTypes {
+  cnt: number
+  list: {
+    dt: number
+    main: {
+      temp: number
+      temp_min: number
+      temp_max: number
+    }
+    weather: {
+      description: string
+      icon: string
+    }[]
+    wind: {
+      speed: number
+      deg: number
+    }
+    dt_txt: string
+  }[]
+}
+
 export function WeatherInformation() {
-  const { airPollution, currentWeather, infoLocations } =
+  const { airPollution, currentWeather, forecastWeather } =
     useContext(localsContext)
-  console.log(JSON.stringify(currentWeather, null, '\t'))
+
+  const { forecastDay, setForecastDay } = useState<forecastWeatherTypes[]>([])
+  // console.log(JSON.stringify(forecastWeather, null, '\t'))
 
   function GetHourByUnix(n: number) {
-    return new Date(currentWeather.dt * 1000).toLocaleString('pt-BR', {
+    return new Date(n * 1000).toLocaleString('pt-BR', {
       hour: 'numeric',
       minute: 'numeric',
     })
   }
+  const currentTreeDaysWeather = forecastWeather.list.slice(0, 24)
+
+  const currentData = new Date().getDate()
+
+  currentTreeDaysWeather.forEach((element) => {})
+
+  console.log()
 
   return (
     <WeatherInformationContainer>
@@ -55,9 +82,8 @@ export function WeatherInformation() {
         <h3>Dados atuais - {GetHourByUnix(currentWeather.dt)}</h3>
         <main>
           <div>
-            <h2>
-              {`Condições atual: ${currentWeather.weather[0].description}`}
-            </h2>
+            <p>Condições atual</p>
+            <span>{currentWeather.weather[0].description}</span>
           </div>
           <div>
             <p>Temperatura</p>
@@ -90,9 +116,6 @@ export function WeatherInformation() {
               <span>06:35</span>
             </aside>
           </div>
-        </main>
-        <h3>Poluição do ar</h3>
-        <main>
           <div>
             <p>Índice de qualidade do ar</p>
             <aside>
@@ -146,34 +169,34 @@ export function WeatherInformation() {
               <span>{QualityIndex[airPollution.list[0].main.aqi - 1]}</span> */}
             </aside>
           </div>
-          <div>
-            <p>Nitrogênio</p>
-            <aside>
-              <span>{`${airPollution.list[0].components.no} μg/m³`}</span>
-            </aside>
-          </div>
-          <div>
-            <p>Ozônio</p>
-            <aside>
-              <span>{`${airPollution.list[0].components.o3} μg/m³`}</span>
-            </aside>
-          </div>
-          <div>
-            <p>Dióxido de enxofre</p>
-            <aside>
-              <span>{`${airPollution.list[0].components.so2} μg/m³`}</span>
-            </aside>
-          </div>
-          <div>
-            <p>Partículas finas</p>
-            <aside>
-              <span>{`${airPollution.list[0].components.pm2_5} μg/m³`}</span>
-            </aside>
-          </div>
         </main>
       </WeatherLayers>
       <WeatherForecast>
-        <div>b</div>
+        <h3>Previsão dos próximos 3 dias</h3>
+        <section>
+          <main>
+            <HourWeather>
+              <img src="" alt="" />
+              <aside>
+                <h4>Chuva leve</h4>
+                <div>
+                  <div>
+                    <svg />
+                    <span>33,2º</span>
+                  </div>
+                  <div>
+                    <svg />
+                    <span>23º</span>
+                  </div>
+                  <div>
+                    <svg />
+                    <span>23º</span>
+                  </div>
+                </div>
+              </aside>
+            </HourWeather>
+          </main>
+        </section>
       </WeatherForecast>
     </WeatherInformationContainer>
   )

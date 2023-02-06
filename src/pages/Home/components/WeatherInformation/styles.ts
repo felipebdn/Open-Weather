@@ -41,10 +41,58 @@ export const TemperatureStatus = styled(baseDivDash)`
 export const WeatherLayers = styled(baseDivDash)`
   grid-area: aside;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  main {
+    padding-top: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+
+      border-bottom: 2px solid #303030;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
+
+      aside {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+    div:last-child {
+      border: 0;
+      margin: 0;
+      padding: 0;
+    }
+  }
 `
 export const WeatherForecast = styled(baseDivDash)`
   grid-area: main;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  section {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    main {
+      border-right: 2px solid #303030;
+    }
+    main:last-child {
+      border: 0;
+    }
+  }
 `
+export const HourWeather = styled.div``
 
 export const WeatherInformationContainer = styled.div`
   display: grid;
@@ -54,7 +102,7 @@ export const WeatherInformationContainer = styled.div`
     'temp main'
     'aside main';
 
-  grid-template-columns: 3fr 4fr;
+  grid-template-columns: 2fr 4fr;
   grid-row-gap: 1rem;
   grid-column-gap: 1rem;
 
