@@ -19,32 +19,9 @@ import {
   WeatherLayers,
 } from './styles'
 
-interface forecastWeatherTypes {
-  cnt: number
-  list: {
-    dt: number
-    main: {
-      temp: number
-      temp_min: number
-      temp_max: number
-    }
-    weather: {
-      description: string
-      icon: string
-    }[]
-    wind: {
-      speed: number
-      deg: number
-    }
-    dt_txt: string
-  }[]
-}
-
 export function WeatherInformation() {
   const { airPollution, currentWeather, forecastWeather } =
     useContext(localsContext)
-
-  const { forecastDay, setForecastDay } = useState<forecastWeatherTypes[]>([])
   // console.log(JSON.stringify(forecastWeather, null, '\t'))
 
   function GetHourByUnix(n: number) {
@@ -53,14 +30,15 @@ export function WeatherInformation() {
       minute: 'numeric',
     })
   }
-  const currentTreeDaysWeather = forecastWeather.list.slice(0, 24)
-
-  const currentData = new Date().getDate()
-
-  currentTreeDaysWeather.forEach((element) => {})
-
-  console.log()
-
+  const aux = forecastWeather.list.findIndex((state) => {
+    return null
+  })
+  // const currentTreeDaysWeather = forecastWeather.list.slice(0, 24)
+  // const { col1, col2, col3 } = {
+  //   col1: currentTreeDaysWeather.slice(0, 7),
+  //   col2: currentTreeDaysWeather.slice(8, 15),
+  //   col3: currentTreeDaysWeather.slice(16, 23),
+  // }
   return (
     <WeatherInformationContainer>
       <TemperatureStatus>
