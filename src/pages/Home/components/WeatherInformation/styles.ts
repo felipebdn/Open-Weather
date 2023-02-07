@@ -75,6 +75,7 @@ export const WeatherLayers = styled(baseDivDash)`
 export const WeatherForecast = styled(baseDivDash)`
   grid-area: main;
 
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,13 +87,39 @@ export const WeatherForecast = styled(baseDivDash)`
 
     main {
       border-right: 2px solid #303030;
+      padding-right: 1rem;
     }
     main:last-child {
       border: 0;
+      padding-right: 0;
     }
   }
 `
-export const HourWeather = styled.div``
+export const HourWeather = styled.div`
+  display: inline-flex;
+
+  img {
+    height: 5rem; //terminar de estilizar
+    width: 5rem; //terminar de estilizar
+  }
+
+  aside {
+    display: flex;
+    flex-direction: column;
+    main {
+      display: flex;
+      border: none;
+      width: 100%;
+      justify-content: space-between;
+
+      div {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+    }
+  }
+`
 
 export const WeatherInformationContainer = styled.div`
   display: grid;

@@ -8,8 +8,10 @@ import {
   ThumbsDown,
   Skull,
   Leaf,
+  Thermometer,
+  Clock,
 } from 'phosphor-react'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { localsContext } from '../../../../context/localsContext'
 import {
   HourWeather,
@@ -24,21 +26,32 @@ export function WeatherInformation() {
     useContext(localsContext)
   // console.log(JSON.stringify(forecastWeather, null, '\t'))
 
+  const getDays = forecastWeather.list.map((element) => {
+    return new Date(element.dt_txt).getDate()
+  })
+  const getDaysUnics = getDays.filter((d, i, a) => a.indexOf(d) === i)
+  const getDaysFinal = getDaysUnics.slice(0, 3)
+  const teste = [
+    forecastWeather.list.filter((element) => {
+      const data = new Date(element.dt_txt).getDate()
+      return data === getDaysFinal[0]
+    }),
+    forecastWeather.list.filter((element) => {
+      const data = new Date(element.dt_txt).getDate()
+      return data === getDaysFinal[1]
+    }),
+    forecastWeather.list.filter((element) => {
+      const data = new Date(element.dt_txt).getDate()
+      return data === getDaysFinal[2]
+    }),
+  ]
+
   function GetHourByUnix(n: number) {
     return new Date(n * 1000).toLocaleString('pt-BR', {
       hour: 'numeric',
       minute: 'numeric',
     })
   }
-  const aux = forecastWeather.list.findIndex((state) => {
-    return null
-  })
-  // const currentTreeDaysWeather = forecastWeather.list.slice(0, 24)
-  // const { col1, col2, col3 } = {
-  //   col1: currentTreeDaysWeather.slice(0, 7),
-  //   col2: currentTreeDaysWeather.slice(8, 15),
-  //   col3: currentTreeDaysWeather.slice(16, 23),
-  // }
   return (
     <WeatherInformationContainer>
       <TemperatureStatus>
@@ -47,14 +60,6 @@ export function WeatherInformation() {
           alt={currentWeather.weather[0].description}
         />
         <h1>{`${currentWeather.main.temp.toFixed(2)}º`}</h1>
-        <aside>
-          <p>
-            max: <span>{`${currentWeather.main.temp_max.toFixed(0)}º`}</span>
-          </p>
-          <p>
-            min: <span>{`${currentWeather.main.temp_min.toFixed(0)}º`}</span>
-          </p>
-        </aside>
       </TemperatureStatus>
       <WeatherLayers>
         <h3>Dados atuais - {GetHourByUnix(currentWeather.dt)}</h3>
@@ -152,28 +157,49 @@ export function WeatherInformation() {
       <WeatherForecast>
         <h3>Previsão dos próximos 3 dias</h3>
         <section>
-          <main>
-            <HourWeather>
-              <img src="" alt="" />
-              <aside>
-                <h4>Chuva leve</h4>
-                <div>
-                  <div>
-                    <svg />
-                    <span>33,2º</span>
-                  </div>
-                  <div>
-                    <svg />
-                    <span>23º</span>
-                  </div>
-                  <div>
-                    <svg />
-                    <span>23º</span>
-                  </div>
-                </div>
-              </aside>
-            </HourWeather>
-          </main>
+          {teste.map((element, i) => {
+            return (
+              <main key={i}>
+                {element.map((forecast, indice) => {
+                  return (
+                    <HourWeather key={indice}>
+                      <img
+                        src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`}
+                        alt=""
+                      />
+                      <aside>
+                        <h4>{forecast.weather[0].description}</h4>
+                        <main>
+                          <div>
+                            <Thermometer size={20} />
+                            <span>{forecast.main.temp}º</span>
+                          </div>
+                          <div>
+                            <ArrowUp size={20} weight="bold" />
+                            <span>{forecast.main.temp_max}º</span>
+                          </div>
+                          <div>
+                            <ArrowDown size={20} weight="bold" />
+                            <span>{forecast.main.temp_min}º</span>
+                          </div>
+                        </main>
+                        <main>
+                          <div>
+                            <ArrowUpRight size={20} weight="bold" />
+                            <span>{`${forecast.wind.deg} - ${forecast.wind.speed}`}</span>
+                          </div>
+                          <div>
+                            <Clock size={20} />
+                            <span>{GetHourByUnix(forecast.dt)}</span>
+                          </div>
+                        </main>
+                      </aside>
+                    </HourWeather>
+                  )
+                })}
+              </main>
+            )
+          })}
         </section>
       </WeatherForecast>
     </WeatherInformationContainer>
