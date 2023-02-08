@@ -32,17 +32,17 @@ export function WeatherInformation() {
   const getDaysUnics = getDays.filter((d, i, a) => a.indexOf(d) === i)
   const getDaysFinal = getDaysUnics.slice(0, 3)
   const teste = [
-    forecastWeather.list.filter((element) => {
+    forecastWeather.list.filter((element, indice) => {
       const data = new Date(element.dt_txt).getDate()
-      return data === getDaysFinal[0]
+      return data === getDaysFinal[0] && indice % 2 === 0
     }),
-    forecastWeather.list.filter((element) => {
+    forecastWeather.list.filter((element, indice) => {
       const data = new Date(element.dt_txt).getDate()
-      return data === getDaysFinal[1]
+      return data === getDaysFinal[1] && indice % 2 === 0
     }),
-    forecastWeather.list.filter((element) => {
+    forecastWeather.list.filter((element, indice) => {
       const data = new Date(element.dt_txt).getDate()
-      return data === getDaysFinal[2]
+      return data === getDaysFinal[2] && indice % 2 === 0
     }),
   ]
 
@@ -94,9 +94,9 @@ export function WeatherInformation() {
           <div>
             <p>Sol</p>
             <aside>
-              <span>06:35</span>
+              <span>{GetHourByUnix(currentWeather.sys.sunrise)}</span>
               <SunHorizon size={20} color="#FFD600" />
-              <span>06:35</span>
+              <span>{GetHourByUnix(currentWeather.sys.sunset)}</span>
             </aside>
           </div>
           <div>
@@ -167,19 +167,23 @@ export function WeatherInformation() {
                         src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`}
                         alt=""
                       />
-                      <aside>
+                      <header>
                         <h4>{forecast.weather[0].description}</h4>
                         <main>
                           <div>
-                            <Thermometer size={20} />
+                            <Thermometer size={20} color="#ff0000a2" />
                             <span>{forecast.main.temp}º</span>
                           </div>
                           <div>
-                            <ArrowUp size={20} weight="bold" />
+                            <ArrowUp size={20} weight="bold" color="#FF0000" />
                             <span>{forecast.main.temp_max}º</span>
                           </div>
                           <div>
-                            <ArrowDown size={20} weight="bold" />
+                            <ArrowDown
+                              size={20}
+                              weight="bold"
+                              color="#0047FF"
+                            />
                             <span>{forecast.main.temp_min}º</span>
                           </div>
                         </main>
@@ -193,7 +197,7 @@ export function WeatherInformation() {
                             <span>{GetHourByUnix(forecast.dt)}</span>
                           </div>
                         </main>
-                      </aside>
+                      </header>
                     </HourWeather>
                   )
                 })}

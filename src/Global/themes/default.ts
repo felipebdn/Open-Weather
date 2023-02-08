@@ -1,6 +1,9 @@
 export const defaultTheme = {
   blue: '#3294F8',
+  'blue-nat': '#0047FF',
   red: '#FA4F4A',
+  'red-nat': '#FF0000',
+  grey: '#676767',
   mauve: '#34343A',
   white: '#fff',
   black: '#000',

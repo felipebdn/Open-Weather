@@ -87,30 +87,41 @@ export const WeatherForecast = styled(baseDivDash)`
 
     main {
       border-right: 2px solid #303030;
-      padding-right: 1rem;
+      padding-right: 0.5rem;
     }
     main:last-child {
       border: 0;
-      padding-right: 0;
     }
   }
 `
 export const HourWeather = styled.div`
   display: inline-flex;
+  margin-bottom: 1rem;
+
+  &:last-child {
+    margin: 0;
+  }
 
   img {
     height: 5rem; //terminar de estilizar
     width: 5rem; //terminar de estilizar
   }
 
-  aside {
+  header {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+
+    h4 {
+      text-transform: capitalize;
+    }
+
     main {
       display: flex;
       border: none;
       width: 100%;
       justify-content: space-between;
+      gap: 0.7rem;
 
       div {
         display: flex;
