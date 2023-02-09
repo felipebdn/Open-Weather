@@ -1,13 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
 
-const size = {
-  sm: '640px',
-  md: '640px',
-  lg: '1024px',
-  xl: '1280px',
-  xl2: '1536px',
-}
-
 export const device = {
   sm: 'min-width: 640px',
   md: 'min-width: 768px',
@@ -15,7 +7,6 @@ export const device = {
   xl: 'min-width: 1280px',
   xl2: 'min-width: 1536px',
 }
-
 export const GlobalStyle = createGlobalStyle`
   *{
     margin: 0;

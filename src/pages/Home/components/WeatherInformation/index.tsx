@@ -50,32 +50,70 @@ export function WeatherInformation() {
       return data === getDaysFinal[2] && indice % 2 === 0
     }),
   ]
-
   function GetHourByUnix(n: number) {
     return new Date(n * 1000).toLocaleString('pt-BR', {
       hour: 'numeric',
       minute: 'numeric',
     })
   }
-
-  function windRose(n: number) {
+  function windRose(n: number, s: number) {
     switch (true) {
       case n <= 23 || n > 338:
-        return <ArrowUp size={20} weight="bold" />
+        return (
+          <>
+            <ArrowUp size={20} weight="bold" />
+            <span>{`N - ${s} m/s`}</span>
+          </>
+        )
       case n > 23 || n <= 68:
-        return <ArrowUpRight size={20} weight="bold" />
+        return (
+          <>
+            <ArrowUpRight size={20} weight="bold" />
+            <span>{`NE - ${s} m/s`}</span>
+          </>
+        )
       case n > 68 || n <= 113:
-        return <ArrowRight size={20} weight="bold" />
+        return (
+          <>
+            <ArrowRight size={20} weight="bold" />
+            <span>{`E - ${s} m/s`}</span>
+          </>
+        )
       case n > 113 || n <= 161:
-        return <ArrowDownRight size={20} weight="bold" />
+        return (
+          <>
+            <ArrowDownRight size={20} weight="bold" />
+            <span>{`SE - ${s} m/s`}</span>
+          </>
+        )
       case n > 161 || n <= 203:
-        return <ArrowDown size={20} weight="bold" />
+        return (
+          <>
+            <ArrowDown size={20} weight="bold" />
+            <span>{`S - ${s} m/s`}</span>
+          </>
+        )
       case n > 203 || n <= 248:
-        return <ArrowDownLeft size={20} weight="bold" />
+        return (
+          <>
+            <ArrowDownLeft size={20} weight="bold" />
+            <span>{`SW - ${s} m/s`}</span>
+          </>
+        )
       case n > 248 || n <= 293:
-        return <ArrowLeft size={20} weight="bold" />
+        return (
+          <>
+            <ArrowLeft size={20} weight="bold" />
+            <span>{`W - ${s} m/s`}</span>
+          </>
+        )
       case n > 293 || n <= 338:
-        return <ArrowUpLeft size={20} weight="bold" />
+        return (
+          <>
+            <ArrowUpLeft size={20} weight="bold" />
+            <span>{`NW - ${s} m/s`}</span>
+          </>
+        )
     }
   }
 
@@ -114,8 +152,7 @@ export function WeatherInformation() {
           <div>
             <p>Vento</p>
             <aside>
-              <ArrowUpRight size={20} color="#676767" weight="bold" />
-              <span>SW - 5km/h</span>
+              {windRose(currentWeather.wind.deg, currentWeather.wind.speed)}
             </aside>
           </div>
           <div>
@@ -216,8 +253,7 @@ export function WeatherInformation() {
                         </main>
                         <main>
                           <div>
-                            {windRose(forecast.wind.deg)}
-                            <span>{`${forecast.wind.deg} - ${forecast.wind.speed} m/s`}</span>
+                            {windRose(forecast.wind.deg, forecast.wind.speed)}
                           </div>
                           <div>
                             <Clock size={20} />

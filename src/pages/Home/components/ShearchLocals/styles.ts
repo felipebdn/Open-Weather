@@ -9,9 +9,9 @@ export const ShearchLocalsContainer = styled.form`
   padding: 2rem 0;
 
   input {
-    background: ${({ theme }) => theme['base-input']};
+    background: ${({ theme }) => theme.mauve};
     color: ${({ theme }) => theme['base-text']};
-    border: 1px solid ${({ theme }) => theme['base-border']};
+    border: 1px solid ${({ theme }) => theme['base-span']};
 
     border-radius: 10px;
     padding: 0.875rem;

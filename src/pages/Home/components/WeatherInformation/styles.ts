@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { device } from '../../../../Global/GlobalStyle'
 
 const baseDivDash = styled.div`
-  background: ${({ theme }) => theme['base-post']};
+  background: ${({ theme }) => theme.mauve};
   padding: 1rem;
   border-radius: 10px;
 `
@@ -55,7 +55,7 @@ export const WeatherLayers = styled(baseDivDash)`
       display: flex;
       justify-content: space-between;
 
-      border-bottom: 2px solid #303030;
+      border-bottom: 2px solid ${({ theme }) => theme['base-background']};
       padding-bottom: 0.5rem;
       margin-bottom: 0.5rem;
 
@@ -87,7 +87,7 @@ export const WeatherForecast = styled(baseDivDash)`
     grid-template-columns: repeat(3, 1fr);
 
     main {
-      border-right: 2px solid #303030;
+      border-right: 2px solid ${({ theme }) => theme['base-background']};
       padding-right: 0.5rem;
     }
     main:last-child {

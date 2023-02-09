@@ -36,7 +36,6 @@ export function LocalsFetched() {
                     />
                   </ButtonMapContainer>
                 </Dialog.Trigger>
-
                 <ViewMapModal
                   name={location.name}
                   lat={location.lat}
