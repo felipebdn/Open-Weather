@@ -10,6 +10,11 @@ import {
   Leaf,
   Thermometer,
   Clock,
+  ArrowRight,
+  ArrowDownRight,
+  ArrowDownLeft,
+  ArrowLeft,
+  ArrowUpLeft,
 } from 'phosphor-react'
 import { useContext } from 'react'
 import { localsContext } from '../../../../context/localsContext'
@@ -52,6 +57,28 @@ export function WeatherInformation() {
       minute: 'numeric',
     })
   }
+
+  function windRose(n: number) {
+    switch (true) {
+      case n <= 23 || n > 338:
+        return <ArrowUp size={20} weight="bold" />
+      case n > 23 || n <= 68:
+        return <ArrowUpRight size={20} weight="bold" />
+      case n > 68 || n <= 113:
+        return <ArrowRight size={20} weight="bold" />
+      case n > 113 || n <= 161:
+        return <ArrowDownRight size={20} weight="bold" />
+      case n > 161 || n <= 203:
+        return <ArrowDown size={20} weight="bold" />
+      case n > 203 || n <= 248:
+        return <ArrowDownLeft size={20} weight="bold" />
+      case n > 248 || n <= 293:
+        return <ArrowLeft size={20} weight="bold" />
+      case n > 293 || n <= 338:
+        return <ArrowUpLeft size={20} weight="bold" />
+    }
+  }
+
   return (
     <WeatherInformationContainer>
       <TemperatureStatus>
@@ -189,8 +216,8 @@ export function WeatherInformation() {
                         </main>
                         <main>
                           <div>
-                            <ArrowUpRight size={20} weight="bold" />
-                            <span>{`${forecast.wind.deg} - ${forecast.wind.speed}`}</span>
+                            {windRose(forecast.wind.deg)}
+                            <span>{`${forecast.wind.deg} - ${forecast.wind.speed} m/s`}</span>
                           </div>
                           <div>
                             <Clock size={20} />

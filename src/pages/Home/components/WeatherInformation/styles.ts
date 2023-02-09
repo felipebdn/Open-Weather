@@ -79,6 +79,7 @@ export const WeatherForecast = styled(baseDivDash)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
 
   section {
     width: 100%;
