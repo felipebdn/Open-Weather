@@ -20,7 +20,6 @@ import { useContext } from 'react'
 import { localsContext } from '../../../../context/localsContext'
 import {
   HourWeather,
-  Semana,
   TemperatureStatus,
   WeatherForecast,
   WeatherInformationContainer,
@@ -224,55 +223,48 @@ export function WeatherInformation() {
         <section>
           {teste.map((element, i) => {
             return (
-              <>
-                <Semana>Segunda</Semana>
-                <main key={i}>
-                  {element.map((forecast, indice) => {
-                    return (
-                      <HourWeather key={indice}>
-                        <img
-                          src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`}
-                          alt=""
-                        />
-                        <header>
-                          <h4>{forecast.weather[0].description}</h4>
-                          <main>
-                            <div>
-                              <Thermometer size={20} color="#ff0000a2" />
-                              <span>{forecast.main.temp}º</span>
-                            </div>
-                            <div>
-                              <ArrowUp
-                                size={20}
-                                weight="bold"
-                                color="#FF0000"
-                              />
-                              <span>{forecast.main.temp_max}º</span>
-                            </div>
-                            <div>
-                              <ArrowDown
-                                size={20}
-                                weight="bold"
-                                color="#0047FF"
-                              />
-                              <span>{forecast.main.temp_min}º</span>
-                            </div>
-                          </main>
-                          <main>
-                            <div>
-                              {windRose(forecast.wind.deg, forecast.wind.speed)}
-                            </div>
-                            <div>
-                              <Clock size={20} />
-                              <span>{GetHourByUnix(forecast.dt)}</span>
-                            </div>
-                          </main>
-                        </header>
-                      </HourWeather>
-                    )
-                  })}
-                </main>
-              </>
+              <main key={i}>
+                {element.map((forecast, indice) => {
+                  return (
+                    <HourWeather key={indice}>
+                      <img
+                        src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`}
+                        alt=""
+                      />
+                      <header>
+                        <h4>{forecast.weather[0].description}</h4>
+                        <main>
+                          <div>
+                            <Thermometer size={20} color="#ff0000a2" />
+                            <span>{forecast.main.temp}º</span>
+                          </div>
+                          <div>
+                            <ArrowUp size={20} weight="bold" color="#FF0000" />
+                            <span>{forecast.main.temp_max}º</span>
+                          </div>
+                          <div>
+                            <ArrowDown
+                              size={20}
+                              weight="bold"
+                              color="#0047FF"
+                            />
+                            <span>{forecast.main.temp_min}º</span>
+                          </div>
+                        </main>
+                        <main>
+                          <div>
+                            {windRose(forecast.wind.deg, forecast.wind.speed)}
+                          </div>
+                          <div>
+                            <Clock size={20} />
+                            <span>{GetHourByUnix(forecast.dt)}</span>
+                          </div>
+                        </main>
+                      </header>
+                    </HourWeather>
+                  )
+                })}
+              </main>
             )
           })}
         </section>
