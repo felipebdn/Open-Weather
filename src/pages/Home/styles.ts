@@ -7,10 +7,7 @@ export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media ${device.xl} {
-    max-width: 1220px;
-  }
+  justify-content: center;
 `
 export const NeverLocation = styled.div`
   width: 100%;

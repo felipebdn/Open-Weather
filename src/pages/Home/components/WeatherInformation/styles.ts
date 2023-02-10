@@ -145,6 +145,11 @@ export const WeatherInformationContainer = styled.div`
   grid-row-gap: 1rem;
   grid-column-gap: 1rem;
 
+  @media screen and (min-width: 1200px) {
+    width: 80%;
+    grid-template-columns: 2fr 5fr;
+  }
+
   /* 
   @media (${device.xl}) {
     padding: 0 1rem;
