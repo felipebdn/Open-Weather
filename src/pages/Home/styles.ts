@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { device } from '../../Global/GlobalStyle'
 
 export const HomeContainer = styled.div`
   width: 100%;

@@ -1,11 +1,12 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const device = {
-  sm: 'min-width: 640px',
-  md: 'min-width: 768px',
-  lg: 'min-width: 1024px',
-  xl: 'min-width: 1280px',
-  xl2: 'min-width: 1536px',
+  'mobal-p': 'min-width: 320px',
+  'mobal-m': 'min-width: 375px',
+  'mobal-g': 'min-width: 425px',
+  tablet: 'min-width: 768px',
+  laptop: 'min-width: 1024px',
+  desktop: 'min-width: 1440px',
 }
 export const GlobalStyle = createGlobalStyle`
   *{

@@ -10,8 +10,14 @@ export const TemperatureStatus = styled(baseDivDash)`
   grid-area: temp;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
+
+  @media screen and (${device['mobal-g']}) {
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
 
   img {
     width: 100px;
@@ -86,7 +92,12 @@ export const WeatherForecast = styled(baseDivDash)`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
+    @media screen and (${device['mobal-g']}) {
+      grid-template-columns: 1fr;
+    }
+
     main {
+      justify-content: space-evenly;
       border-right: 2px solid ${({ theme }) => theme['base-background']};
       padding-right: 0.5rem;
     }
@@ -97,7 +108,12 @@ export const WeatherForecast = styled(baseDivDash)`
 `
 export const HourWeather = styled.div`
   display: inline-flex;
+  width: 100%;
+  justify-content: space-evenly;
   margin-bottom: 1rem;
+
+  @media screen and (${device['mobal-g']}) {
+  }
 
   &:last-child {
     margin: 0;
@@ -135,24 +151,23 @@ export const HourWeather = styled.div`
 
 export const WeatherInformationContainer = styled.div`
   display: grid;
-  width: 100%;
-  padding: 1rem;
   grid-template-areas:
-    'temp main'
-    'aside main';
-
-  grid-template-columns: 2fr 4fr;
+    'temp'
+    'aside'
+    'main';
   grid-row-gap: 1rem;
-  grid-column-gap: 1rem;
 
-  @media screen and (min-width: 1200px) {
-    width: 80%;
-    grid-template-columns: 2fr 5fr;
-  }
-
-  /* 
-  @media (${device.xl}) {
-    padding: 0 1rem;
+  @media screen and (${device['mobal-g']}) {
     width: 100%;
-  } */
+    grid-template-areas:
+      'temp aside'
+      'main main';
+    grid-column-gap: 1rem;
+    grid-template-columns: 2fr 4fr;
+  }
+  /* @media screen and (min-width: 1440px) {
+      max-width: 80%;
+      grid-template-columns: 2fr 5fr;
+    } */
 `
+export const Semana = styled.div``
